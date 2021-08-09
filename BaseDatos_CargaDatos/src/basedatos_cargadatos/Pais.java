@@ -422,7 +422,7 @@ public class Pais extends javax.swing.JFrame{
         });
     }
     void listar(){
-	String sql="SELECT * FROM GZZ_PAISES";
+	String sql="SELECT * FROM gzz_pais";
 	try {
             con = cn.getConnection();
             st = con.createStatement();
@@ -433,8 +433,8 @@ public class Pais extends javax.swing.JFrame{
             model = (DefaultTableModel) listaTable.getModel();
             while(rs.next()) {
                 premio[0] = rs.getInt("PaiCod");
-                premio[1] = rs.getString("PaiDes");
-                premio[2] = rs.getString("EstRegCod");
+                premio[1] = rs.getString("PaiNom");
+                premio[2] = rs.getString("PaiEstRegCod");
                 model.addRow(premio);
             }
             listaTable.setModel(model);
@@ -450,7 +450,7 @@ public class Pais extends javax.swing.JFrame{
                 JOptionPane.showMessageDialog(null, "Debe Ingresar Datos");
                 limpiarTabla(model);               
             } else {
-                String sql = "insert into GZZ_Paises(PaiCod,PaiDes,EstRegCod) values('" + cod + "','" + nom + "','" + estado + "')";
+                String sql = "insert into gzz_pais(PaiCod,PaiNom,PaiEstRegCod) values('" + cod + "','" + nom + "','" + estado + "')";
                 con = cn.getConnection();
                 st = con.createStatement();
                 st.executeUpdate(sql);
@@ -465,7 +465,7 @@ public class Pais extends javax.swing.JFrame{
     void Modificar() {
         String nom = nombre_txt.getText();
         String estado = estado_txt.getText();
-        String sql = "update GZZ_Paises set EstRegCod='" + estado + "',PaiDes='" + nom + "' where PaiCod=" + id;
+        String sql = "update gzz_pais set PaiEstRegCod='" + estado + "',PaiNom='" + nom + "' where PaiCod=" + id;
         try {
             if (estado != null || nom != null) {
                 con = cn.getConnection();
@@ -485,7 +485,7 @@ public class Pais extends javax.swing.JFrame{
 
     void Eliminar() {
     	String estado = "*";
-        String sql = "update GZZ_Paises set EstRegCod='" + estado + "' where PaiCod=" + id;
+        String sql = "update gzz_pais set PaiEstRegCod='" + estado + "' where PaiCod=" + id;
         int fila = listaTable.getSelectedRow();
         if (fila < 0) {
             JOptionPane.showMessageDialog(null,"Pais no Seleccionado");
@@ -539,7 +539,7 @@ public class Pais extends javax.swing.JFrame{
         flag = 0;
     }
     void Reactivar(){
-        String sql = "update GZZ_Paises set EstRegCod='A' where PaiCod=" + id;
+        String sql = "update gzz_pais set PaiEstRegCod='A' where PaiCod=" + id;
         try {
             
                 con = cn.getConnection();
@@ -555,7 +555,7 @@ public class Pais extends javax.swing.JFrame{
         
     }
     void Inactivar(){
-        String sql = "update GZZ_Paises set EstRegCod='I' where PaiCod=" + id;
+        String sql = "update gzz_pais set PaiEstRegCod='I' where PaiCod=" + id;
         try {
             
                 con = cn.getConnection();

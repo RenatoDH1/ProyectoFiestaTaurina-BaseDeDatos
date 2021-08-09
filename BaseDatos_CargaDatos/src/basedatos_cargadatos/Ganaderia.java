@@ -527,7 +527,7 @@ public class Ganaderia extends javax.swing.JFrame{
     }
     
     void listar(){
-	String sql="SELECT * FROM L1Z_GANADERIA";
+	String sql="SELECT * FROM l1z_ganaderia";
 	try {
             con = cn.getConnection();
             st = con.createStatement();
@@ -542,12 +542,12 @@ public class Ganaderia extends javax.swing.JFrame{
                 premio[0] = rs.getInt("GanCod");
                 premio[1] = rs.getString("GanNom");
                 premio[2] = rs.getString("GanDue");
-                premio[3] = rs.getString("PaiCod");
-                premio[4] = rs.getString("RegCod");
+                premio[3] = rs.getString("GanPaiCod");
+                premio[4] = rs.getString("GanRegCod");
                 premio[5] = rs.getString("GanDir");
                 premio[6] = rs.getString("GanCol");
                 premio[7] = rs.getString("GanHie");
-                premio[8] = rs.getString("EstRegCod");
+                premio[8] = rs.getString("GanEstRegCod");
                 model.addRow(premio);
             }
             listaTable.setModel(model);
@@ -570,7 +570,7 @@ public class Ganaderia extends javax.swing.JFrame{
                 JOptionPane.showMessageDialog(null, "Debe Ingresar Datos");
                 limpiarTabla(model);               
             } else {
-                String sql = "insert into L1Z_Ganaderia(GanCod,GanDue,GanDir,GanCol,GanHie,RegCod,PaiCod,EstRegCod) values('" +cod+ "','" +nom+ "','" +due+ "','" +dir+"','" +col+"','" +hie+"','" +reg+"','" +pai+"','" +estado+ "')";
+                String sql = "insert into l1z_ganaderia(GanCod,GanDue,GanDir,GanCol,GanHie,GanRegCod,GanPaiCod,GanEstRegCod) values('" +cod+ "','" +nom+ "','" +due+ "','" +dir+"','" +col+"','" +hie+"','" +reg+"','" +pai+"','" +estado+ "')";
                 con = cn.getConnection();
                 st = con.createStatement();
                 st.executeUpdate(sql);
@@ -595,7 +595,7 @@ public class Ganaderia extends javax.swing.JFrame{
         String col = codigo_txt.getText();
         String hie = codigo_txt.getText();
         String estado = estado_txt.getText();
-        String sql = "update L1Z_Ganaderia set EstRegCod='" + estado + "',GanNom='" + nom + "',GanDue='" + due +"',GanDir='" + dir +"',GanCol='" + col +"',GanHie='" + hie +"',RegCod='" + reg +"',PaiCod='" + pai +"' where PaiCod=" + id;
+        String sql = "update l1z_ganaderia set GanEstRegCod='" + estado + "',GanNom='" + nom + "',GanDue='" + due +"',GanDir='" + dir +"',GanCol='" + col +"',GanHie='" + hie +"',GanRegCod='" + reg +"',GanPaiCod='" + pai +"' where GanCod=" + id;
         try {
             if (estado != null || nom != null) {
                 con = cn.getConnection();
@@ -615,7 +615,7 @@ public class Ganaderia extends javax.swing.JFrame{
 
     void Eliminar() {
         String estado = "*";
-        String sql = "update L1Z_Ganaderia set EstRegCod='" + estado + "' where GanCod=" + id;
+        String sql = "update l1z_ganaderia set GanEstRegCod='" + estado + "' where GanCod=" + id;
         int fila = listaTable.getSelectedRow();
         if (fila < 0) {
             JOptionPane.showMessageDialog(null,"Ganaderia no Seleccionado");
@@ -670,7 +670,7 @@ public class Ganaderia extends javax.swing.JFrame{
         flag = 0;
     }
     void Reactivar(){
-        String sql = "update L1Z_Ganaderia set EstRegCod='A' where GanCod=" + id;
+        String sql = "update l1z_ganaderia set GanEstRegCod='A' where GanCod=" + id;
         try {
             
                 con = cn.getConnection();
@@ -686,7 +686,7 @@ public class Ganaderia extends javax.swing.JFrame{
         
     }
     void Inactivar(){
-        String sql = "update L1Z_Ganaderia set EstRegCod='I' where GanCod=" + id;
+        String sql = "update l1z_ganaderia set GanEstRegCod='I' where GanCod=" + id;
         try {
             
                 con = cn.getConnection();

@@ -423,7 +423,7 @@ public class TipoMatador extends javax.swing.JFrame{
         });
     }
     void listar(){
-	String sql="SELECT * FROM L2Z_TIPO_MATADOR";
+	String sql="SELECT * FROM l2z_tipo_matador";
 	try {
             con = cn.getConnection();
             st = con.createStatement();
@@ -435,7 +435,7 @@ public class TipoMatador extends javax.swing.JFrame{
             while(rs.next()) {
                 premio[0] = rs.getInt("TipMatCod");
                 premio[1] = rs.getString("TipMatNom");
-                premio[2] = rs.getString("EstRegCod");
+                premio[2] = rs.getString("TipMatEstRegCod");
                 model.addRow(premio);
             }
             listaTable.setModel(model);
@@ -452,7 +452,7 @@ public class TipoMatador extends javax.swing.JFrame{
                 JOptionPane.showMessageDialog(null, "Debe Ingresar Datos");
                 limpiarTabla(model);               
             } else {
-                String sql = "insert into L2Z_Tipo_Matador(TipMatCod,TipMatNom,EstRegCod) values('" + cod + "','" + nom + "','" + estado + "')";
+                String sql = "insert into l2z_tipo_matador(TipMatCod,TipMatNom,TipMatEstRegCod) values('" + cod + "','" + nom + "','" + estado + "')";
                 con = cn.getConnection();
                 st = con.createStatement();
                 st.executeUpdate(sql);
@@ -467,7 +467,7 @@ public class TipoMatador extends javax.swing.JFrame{
     void Modificar() {
         String nom = nombre_txt.getText();
         String estado = estado_txt.getText();
-        String sql = "update L2Z_Tipo_Matador set EstRegCod='" + estado + "',TipMatNom='" + nom + "' where TipMatCod=" + id;
+        String sql = "update l2z_tipo_matador set TipMatEstRegCod='" + estado + "',TipMatNom='" + nom + "' where TipMatCod=" + id;
         try {
             if (estado != null || nom != null) {
                 con = cn.getConnection();
@@ -488,7 +488,7 @@ public class TipoMatador extends javax.swing.JFrame{
     void Eliminar() {
       //  String sql = "delete from GZZ_PAISES where PaiCod=" + id;
     	String estado = "*";
-        String sql = "update L2Z_Tipo_Matador set EstRegCod='" + estado + "' where TipMatCod=" + id;
+        String sql = "update l2z_tipo_matador set TipMatEstRegCod='" + estado + "' where TipMatCod=" + id;
         int fila = listaTable.getSelectedRow();
         if (fila < 0) {
             JOptionPane.showMessageDialog(null,"Tipo de Matador no Seleccionado");
@@ -542,7 +542,7 @@ public class TipoMatador extends javax.swing.JFrame{
         flag = 0;
     }
     void Reactivar(){
-        String sql = "update L2Z_Tipo_Matador set EstRegCod='A' where TipMatCod=" + id;
+        String sql = "update l2z_tipo_matador set TipMatEstRegCod='A' where TipMatCod=" + id;
         try {
             
                 con = cn.getConnection();
@@ -558,7 +558,7 @@ public class TipoMatador extends javax.swing.JFrame{
         
     }
     void Inactivar(){
-        String sql = "update L2Z_Tipo_Matador set EstRegCod='I' where TipMatCod=" + id;
+        String sql = "update l2z_tipo_matador set TipMatEstRegCod='I' where TipMatCod=" + id;
         try {
             
                 con = cn.getConnection();

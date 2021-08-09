@@ -422,7 +422,7 @@ public class TipoAsiento extends javax.swing.JFrame{
         });
     }
     void listar(){
-	String sql="SELECT * FROM L3Z_TIPO_ASIENTO";
+	String sql="SELECT * FROM l3z_tipo_asiento";
 	try {
             con = cn.getConnection();
             st = con.createStatement();
@@ -434,7 +434,7 @@ public class TipoAsiento extends javax.swing.JFrame{
             while(rs.next()) {
                 premio[0] = rs.getInt("TipAsiCod");
                 premio[1] = rs.getString("TipAsiNom");
-                premio[2] = rs.getString("EstRegCod");
+                premio[2] = rs.getString("TipAsiEstRegCod");
                 model.addRow(premio);
             }
             listaTable.setModel(model);
@@ -451,7 +451,7 @@ public class TipoAsiento extends javax.swing.JFrame{
                 JOptionPane.showMessageDialog(null, "Debe Ingresar Datos");
                 limpiarTabla(model);               
             } else {
-                String sql = "insert into L3Z_Tipo_Asiento(TipAsiCod,TipAsiNom,EstRegCod) values('" + cod + "','" + nom + "','" + estado + "')";
+                String sql = "insert into l3z_tipo_asiento(TipAsiCod,TipAsiNom,TipAsiEstRegCod) values('" + cod + "','" + nom + "','" + estado + "')";
                 con = cn.getConnection();
                 st = con.createStatement();
                 st.executeUpdate(sql);
@@ -466,7 +466,7 @@ public class TipoAsiento extends javax.swing.JFrame{
     void Modificar() {
         String nom = nombre_txt.getText();
         String estado = estado_txt.getText();
-        String sql = "update L3Z_Tipo_Asiento set EstRegCod='" + estado + "',TipAsiNom='" + nom + "' where TipAsiCod=" + id;
+        String sql = "update l3z_tipo_asiento set TipAsiEstRegCod='" + estado + "',TipAsiNom='" + nom + "' where TipAsiCod=" + id;
         try {
             if (estado != null || nom != null) {
                 con = cn.getConnection();
@@ -487,7 +487,7 @@ public class TipoAsiento extends javax.swing.JFrame{
     void Eliminar() {
       //  String sql = "delete from GZZ_PAISES where PaiCod=" + id;
     	String estado = "*";
-        String sql = "update L3Z_Tipo_Asiento set EstRegCod='" + estado + "' where TipAsiCod=" + id;
+        String sql = "update l3z_tipo_asiento set TipAsiEstRegCod='" + estado + "' where TipAsiCod=" + id;
         int fila = listaTable.getSelectedRow();
         if (fila < 0) {
             JOptionPane.showMessageDialog(null,"Tipo de Asiento no Seleccionado");
@@ -541,7 +541,7 @@ public class TipoAsiento extends javax.swing.JFrame{
         flag = 0;
     }
     void Reactivar(){
-        String sql = "update L3Z_Tipo_Asiento set EstRegCod='A' where TipAsiCod=" + id;
+        String sql = "update l3z_tipo_asiento set TipAsiEstRegCod='A' where TipAsiCod=" + id;
         try {
             
                 con = cn.getConnection();
@@ -557,7 +557,7 @@ public class TipoAsiento extends javax.swing.JFrame{
         
     }
     void Inactivar(){
-        String sql = "update L3Z_Tipo_Asiento set EstRegCod='I' where TipAsiCod=" + id;
+        String sql = "update l3z_tipo_asiento set TipAsiEstRegCod='I' where TipAsiCod=" + id;
         try {
             
                 con = cn.getConnection();

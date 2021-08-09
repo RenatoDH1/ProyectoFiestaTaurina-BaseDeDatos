@@ -422,7 +422,7 @@ public class CategoriaFiesta extends javax.swing.JFrame{
         });
     }
     void listar(){
-	String sql="SELECT * FROM L4Z_CATEGORIA_FIESTA";
+	String sql="SELECT * FROM l4z_categoria_fiesta";
 	try {
             con = cn.getConnection();
             st = con.createStatement();
@@ -434,7 +434,7 @@ public class CategoriaFiesta extends javax.swing.JFrame{
             while(rs.next()) {
                 premio[0] = rs.getInt("CatFieCod");
                 premio[1] = rs.getString("CatFieNom");
-                premio[2] = rs.getString("EstRegCod");
+                premio[2] = rs.getString("CatFieEstRegCod");
                 model.addRow(premio);
             }
             listaTable.setModel(model);
@@ -451,7 +451,7 @@ public class CategoriaFiesta extends javax.swing.JFrame{
                 JOptionPane.showMessageDialog(null, "Debe Ingresar Datos");
                 limpiarTabla(model);               
             } else {
-                String sql = "insert into L4Z_Categoria_Fiesta(CatFieCod,CatFieNom,EstRegCod) values('" + cod + "','" + nom + "','" + estado + "')";
+                String sql = "insert into l4z_categoria_fiesta(CatFieCod,CatFieNom,CatFieEstRegCod) values('" + cod + "','" + nom + "','" + estado + "')";
                 con = cn.getConnection();
                 st = con.createStatement();
                 st.executeUpdate(sql);
@@ -466,7 +466,7 @@ public class CategoriaFiesta extends javax.swing.JFrame{
     void Modificar() {
         String nom = nombre_txt.getText();
         String estado = estado_txt.getText();
-        String sql = "update L4Z_Categoria_Fiesta set EstRegCod='" + estado + "',CatFieNom='" + nom + "' where CatFieCod=" + id;
+        String sql = "update l4z_categoria_fiesta set CatFieEstRegCod='" + estado + "',CatFieNom='" + nom + "' where CatFieCod=" + id;
         try {
             if (estado != null || nom != null) {
                 con = cn.getConnection();
@@ -487,7 +487,7 @@ public class CategoriaFiesta extends javax.swing.JFrame{
     void Eliminar() {
       //  String sql = "delete from GZZ_PAISES where PaiCod=" + id;
     	String estado = "*";
-        String sql = "update L4Z_Categoria_Fiesta set EstRegCod='" + estado + "' where CatFieCod=" + id;
+        String sql = "update l4z_categoria_fiesta set CatFieEstRegCod='" + estado + "' where CatFieCod=" + id;
         int fila = listaTable.getSelectedRow();
         if (fila < 0) {
             JOptionPane.showMessageDialog(null,"Categoria de Fiesta no Seleccionado");
@@ -541,7 +541,7 @@ public class CategoriaFiesta extends javax.swing.JFrame{
         flag = 0;
     }
     void Reactivar(){
-        String sql = "update L4Z_Categoria_Fiesta set EstRegCod='A' where CatFieCod=" + id;
+        String sql = "update l4z_categoria_fiesta set CatFieEstRegCod='A' where CatFieCod=" + id;
         try {
             
                 con = cn.getConnection();
@@ -557,7 +557,7 @@ public class CategoriaFiesta extends javax.swing.JFrame{
         
     }
     void Inactivar(){
-        String sql = "update L4Z_Categoria_Fiesta set EstRegCod='I' where CatFieCod=" + id;
+        String sql = "update l4z_categoria_fiesta set CatFieEstRegCod='I' where CatFieCod=" + id;
         try {
             
                 con = cn.getConnection();

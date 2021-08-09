@@ -422,7 +422,7 @@ public class RepresentanteMatador extends javax.swing.JFrame{
         });
     }
     void listar(){
-	String sql="SELECT * FROM L2Z_REPRESENTANTE_MATADOR";
+	String sql="SELECT * FROM l2z_representante_matador";
 	try {
             con = cn.getConnection();
             st = con.createStatement();
@@ -436,7 +436,7 @@ public class RepresentanteMatador extends javax.swing.JFrame{
             while(rs.next()) {
                 premio[0] = rs.getInt("RepMatCod");
                 premio[1] = rs.getString("RepMatNom");
-                premio[2] = rs.getString("EstRegCod");
+                premio[2] = rs.getString("RepMatEstRegCod");
                 model.addRow(premio);
             }
             listaTable.setModel(model);
@@ -453,7 +453,7 @@ public class RepresentanteMatador extends javax.swing.JFrame{
                 JOptionPane.showMessageDialog(null, "Debe Ingresar Datos");
                 limpiarTabla(model);               
             } else {
-                String sql = "insert into L2Z_Representante_Matador(RepMatCod,RepMatNom,EstRegCod) values('" + cod + "','" + nom + "','" + estado + "')";
+                String sql = "insert into l2z_representante_matador(RepMatCod,RepMatNom,RepMatEstRegCod) values('" + cod + "','" + nom + "','" + estado + "')";
                 con = cn.getConnection();
                 st = con.createStatement();
                 st.executeUpdate(sql);
@@ -468,7 +468,7 @@ public class RepresentanteMatador extends javax.swing.JFrame{
     void Modificar() {
         String nom = nombre_txt.getText();
         String estado = estado_txt.getText();
-        String sql = "update L2Z_Representante_Matador set EstRegCod='" + estado + "',RepMatNom='" + nom + "' where RepMatCod=" + id;
+        String sql = "update l2z_representante_matador set RepMatEstRegCod='" + estado + "',RepMatNom='" + nom + "' where RepMatCod=" + id;
         try {
             if (estado != null || nom != null) {
                 con = cn.getConnection();
@@ -489,7 +489,7 @@ public class RepresentanteMatador extends javax.swing.JFrame{
     void Eliminar() {
       //  String sql = "delete from GZZ_PAISES where PaiCod=" + id;
     	String estado = "*";
-        String sql = "update L2Z_Representante_Matador set EstRegCod='" + estado + "' where RepMatCod=" + id;
+        String sql = "update l2z_representante_matador set RepMatEstRegCod='" + estado + "' where RepMatCod=" + id;
         int fila = listaTable.getSelectedRow();
         if (fila < 0) {
             JOptionPane.showMessageDialog(null,"Representante Matador no Seleccionado");
@@ -543,7 +543,7 @@ public class RepresentanteMatador extends javax.swing.JFrame{
         flag = 0;
     }
     void Reactivar(){
-        String sql = "update L2Z_Representante_Matador set EstRegCod='A' where RepMatCod=" + id;
+        String sql = "update l2z_representante_matador set RepMatEstRegCod='A' where RepMatCod=" + id;
         try {
             
                 con = cn.getConnection();
@@ -559,7 +559,7 @@ public class RepresentanteMatador extends javax.swing.JFrame{
         
     }
     void Inactivar(){
-        String sql = "update L2Z_Representante_Matador set EstRegCod='I' where RepMatCod=" + id;
+        String sql = "update l2z_representante_matador set RepMatEstRegCod='I' where RepMatCod=" + id;
         try {
             
                 con = cn.getConnection();

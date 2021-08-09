@@ -422,7 +422,7 @@ public class Premio extends javax.swing.JFrame{
         });
     }
     void listar(){
-	String sql="SELECT * FROM L4Z_PREMIO";
+	String sql="SELECT * FROM l4z_premio";
 	try {
             con = cn.getConnection();
             st = con.createStatement();
@@ -434,7 +434,7 @@ public class Premio extends javax.swing.JFrame{
             while(rs.next()) {
                 premio[0] = rs.getInt("PreCod");
                 premio[1] = rs.getString("PreNom");
-                premio[2] = rs.getString("EstRegCod");
+                premio[2] = rs.getString("PreEstRegCod");
                 model.addRow(premio);
             }
             listaTable.setModel(model);
@@ -451,7 +451,7 @@ public class Premio extends javax.swing.JFrame{
                 JOptionPane.showMessageDialog(null, "Debe Ingresar Datos");
                 limpiarTabla(model);               
             } else {
-                String sql = "insert into L4Z_Premio(PreCod,PreNom,EstRegCod) values('" + cod + "','" + nom + "','" + estado + "')";
+                String sql = "insert into l4z_premio(PreCod,PreNom,PreEstRegCod) values('" + cod + "','" + nom + "','" + estado + "')";
                 con = cn.getConnection();
                 st = con.createStatement();
                 st.executeUpdate(sql);
@@ -466,7 +466,7 @@ public class Premio extends javax.swing.JFrame{
     void Modificar() {
         String nom = nombre_txt.getText();
         String estado = estado_txt.getText();
-        String sql = "update L4Z_Premio set EstRegCod='" + estado + "',PreNom='" + nom + "' where PreCod=" + id;
+        String sql = "update l4z_premio set PreEstRegCod='" + estado + "',PreNom='" + nom + "' where PreCod=" + id;
         try {
             if (estado != null || nom != null) {
                 con = cn.getConnection();
@@ -487,7 +487,7 @@ public class Premio extends javax.swing.JFrame{
     void Eliminar() {
       //  String sql = "delete from GZZ_PAISES where PaiCod=" + id;
     	String estado = "*";
-        String sql = "update L4Z_Premio set EstRegCod='" + estado + "' where PreCod=" + id;
+        String sql = "update l4z_premio set PreEstRegCod='" + estado + "' where PreCod=" + id;
         int fila = listaTable.getSelectedRow();
         if (fila < 0) {
             JOptionPane.showMessageDialog(null,"Premio no Seleccionado");
@@ -541,7 +541,7 @@ public class Premio extends javax.swing.JFrame{
         flag = 0;
     }
     void Reactivar(){
-        String sql = "update L4Z_Premio set EstRegCod='A' where PreCod=" + id;
+        String sql = "update l4z_premio set PreEstRegCod='A' where PreCod=" + id;
         try {
             
                 con = cn.getConnection();
@@ -557,7 +557,7 @@ public class Premio extends javax.swing.JFrame{
         
     }
     void Inactivar(){
-        String sql = "update L4Z_Premio set EstRegCod='I' where PreCod=" + id;
+        String sql = "update l4z_premio set PreEstRegCod='I' where PreCod=" + id;
         try {
             
                 con = cn.getConnection();

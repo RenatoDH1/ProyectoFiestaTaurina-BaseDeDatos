@@ -16,7 +16,7 @@ public class Connect {
     public Connect(){
         try {
         Class.forName("com.mysql.cj.jdbc.Driver"); // el del video era: "com.mysql.jdbc.Driver"
-	    final String dbName="basededatos"; //el nombre de la base de datos
+	    final String dbName="db_fiestas_taurinas"; //el nombre de la base de datos
 	    final String url="jdbc:mysql://localhost/"; //el del video era: "jdbc:mysql://localhost:3306/"
 	    con=DriverManager.getConnection(url+dbName,"root","12345678");//el num es la contrasenia del mysql
 	    

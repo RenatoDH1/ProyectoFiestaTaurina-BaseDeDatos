@@ -196,7 +196,7 @@ public class Matador extends javax.swing.JFrame{
 
             },
             new String [] {
-                "Codigo", "Nombre", "Tipo", "Dias Inactivo", "Codigo Respresentante", "Estado Registro"
+                "Codigo", "Nombre", "Tipo", "Dias Inactivo", "Codigo Representante", "Estado Registro"
             }
         ));
         listaTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -469,7 +469,7 @@ public class Matador extends javax.swing.JFrame{
     }
     
     void listar(){
-	String sql="SELECT * FROM L2Z_MATADORES";
+	String sql="SELECT * FROM l2z_matador";
 	try {
             con = cn.getConnection();
             st = con.createStatement();
@@ -484,7 +484,7 @@ public class Matador extends javax.swing.JFrame{
                 premio[2] = rs.getInt("MatTipMatCod");
                 premio[3] = rs.getInt("MatDiaUltLid");
                 premio[4] = rs.getInt("MatRepMatCod");
-                premio[5] = rs.getString("EstRegCod");
+                premio[5] = rs.getString("MatEstRegCod");
                 model.addRow(premio);
             }
             listaTable.setModel(model);
@@ -504,7 +504,7 @@ public class Matador extends javax.swing.JFrame{
                 JOptionPane.showMessageDialog(null, "Debe Ingresar Datos");
                 limpiarTabla(model);               
             } else {
-                String sql = "insert into L2Z_Matadores(MatCod,MatNom,MatDiaUltLid,MatTipMatCod,MatRepMatCod,EstRegCod) values('" +cod+ "','" +nom+ "','" +dia+ "','"+tip+ "','"+rep+ "','"+estado+ "')";
+                String sql = "insert into l2z_Matador(MatCod,MatNom,MatDiaUltLid,MatTipMatCod,MatRepMatCod,MatEstRegCod) values('" +cod+ "','" +nom+ "','" +dia+ "','"+tip+ "','"+rep+ "','"+estado+ "')";
                 con = cn.getConnection();
                 st = con.createStatement();
                 st.executeUpdate(sql);
@@ -526,7 +526,7 @@ public class Matador extends javax.swing.JFrame{
         String tip = tipo_txt1.getText();
         String rep = codigoRepresentante_txt2.getText();
         String estado = estado_txt1.getText();
-        String sql = "update L2Z_Matadores set EstRegCod='" + estado + "',MatNom='" +nom+"',MatDiaUltLid='" +dia+"',MatRepMatCod='" +rep+"',MatTipMatCod='" +tip+ "' where MatCod=" + id;
+        String sql = "update l2z_matador set MatEstRegCod='" + estado + "',MatNom='" +nom+"',MatDiaUltLid='" +dia+"',MatRepMatCod='" +rep+"',MatTipMatCod='" +tip+ "' where MatCod=" + id;
         try {
             if (estado != null || nom != null) {
                 con = cn.getConnection();
@@ -546,7 +546,7 @@ public class Matador extends javax.swing.JFrame{
 
     void Eliminar() {
         String estado="*";
-        String sql = "update L2Z_Matadores set EstRegCod='" + estado + "' where MatCod=" + id;
+        String sql = "update l2z_matador set MatEstRegCod='" + estado + "' where MatCod=" + id;
         int fila = listaTable.getSelectedRow();
         if (fila < 0) {
             JOptionPane.showMessageDialog(null,"Matador no Seleccionado");
@@ -605,7 +605,7 @@ public class Matador extends javax.swing.JFrame{
         flag = 0;
     }
     void Reactivar(){
-        String sql = "update L2Z_Matadores set EstRegCod='A' where MatCod=" + id;
+        String sql = "update l2z_matador set MatEstRegCod='A' where MatCod=" + id;
         try {
             
                 con = cn.getConnection();
@@ -621,7 +621,7 @@ public class Matador extends javax.swing.JFrame{
         
     }
     void Inactivar(){
-        String sql = "update L2Z_Matadores set EstRegCod='I' where MatCod=" + id;
+        String sql = "update l2z_matador set MatEstRegCod='I' where MatCod=" + id;
         try {
             
                 con = cn.getConnection();

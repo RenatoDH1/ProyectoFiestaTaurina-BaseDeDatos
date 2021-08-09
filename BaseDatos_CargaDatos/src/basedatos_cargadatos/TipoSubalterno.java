@@ -422,7 +422,7 @@ public class TipoSubalterno extends javax.swing.JFrame{
         });
     }
     void listar(){
-	String sql="SELECT * FROM L2Z_TIPOS_SUBALTERNO";
+	String sql="SELECT * FROM l2z_tipo_subalterno";
 	try {
             con = cn.getConnection();
             st = con.createStatement();
@@ -435,8 +435,8 @@ public class TipoSubalterno extends javax.swing.JFrame{
             model = (DefaultTableModel) listaTable.getModel();
             while(rs.next()) {
                 premio[0] = rs.getInt("TipSubCod");
-                premio[1] = rs.getString("TipSub");
-                premio[2] = rs.getString("EstRegCod");
+                premio[1] = rs.getString("TipSubNom");
+                premio[2] = rs.getString("TipSubEstRegCod");
                 model.addRow(premio);
             }
             listaTable.setModel(model);
@@ -453,7 +453,7 @@ public class TipoSubalterno extends javax.swing.JFrame{
                 JOptionPane.showMessageDialog(null, "Debe Ingresar Datos");
                 limpiarTabla(model);               
             } else {
-                String sql = "insert into L2Z_Tipos_Subalterno(TipSubCod,TipSub,EstRegCod) values('" + cod + "','" + nom + "','" + estado + "')";
+                String sql = "insert into l2z_tipo_subalterno(TipSubCod,TipSubNom,TipSubEstRegCod) values('" + cod + "','" + nom + "','" + estado + "')";
                 con = cn.getConnection();
                 st = con.createStatement();
                 st.executeUpdate(sql);
@@ -468,7 +468,7 @@ public class TipoSubalterno extends javax.swing.JFrame{
     void Modificar() {
         String nom = nombre_txt.getText();
         String estado = estado_txt.getText();
-        String sql = "update L2Z_Tipos_Subalterno set EstRegCod='" + estado + "',TipSub='" + nom + "' where TipSubCod=" + id;
+        String sql = "update l2z_tipo_subalterno set TipSubEstRegCod='" + estado + "',TipSubNom='" + nom + "' where TipSubCod=" + id;
         try {
             if (estado != null || nom != null) {
                 con = cn.getConnection();
@@ -489,7 +489,7 @@ public class TipoSubalterno extends javax.swing.JFrame{
     void Eliminar() {
       //  String sql = "delete from GZZ_PAISES where PaiCod=" + id;
     	String estado = "*";
-        String sql = "update L2Z_Tipos_Subalterno set EstRegCod='" + estado + "' where TipSubCod=" + id;
+        String sql = "update l2z_tipo_Subalterno set SubTipEstRegCod='" + estado + "' where TipSubCod=" + id;
         int fila = listaTable.getSelectedRow();
         if (fila < 0) {
             JOptionPane.showMessageDialog(null,"Tipo de Subalterno no Seleccionado");
@@ -543,7 +543,7 @@ public class TipoSubalterno extends javax.swing.JFrame{
         flag = 0;
     }
     void Reactivar(){
-        String sql = "update L2Z_Tipos_Subalterno set EstRegCod='A' where TipSubCod=" + id;
+        String sql = "update l2z_tipo_subalterno set TipSubEstRegCod='A' where TipSubCod=" + id;
         try {
             
                 con = cn.getConnection();
@@ -559,7 +559,7 @@ public class TipoSubalterno extends javax.swing.JFrame{
         
     }
     void Inactivar(){
-        String sql = "update L2Z_Tipos_Subalterno set EstRegCod='I' where TipSubCod=" + id;
+        String sql = "update l2z_tipo_subalterno set TipSubEstRegCod='I' where TipSubCod=" + id;
         try {
             
                 con = cn.getConnection();
